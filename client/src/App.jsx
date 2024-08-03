@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import Header from "./components/Header";
+import AllNews from "./components/AllNews";
+// import Footer from "./components/Footer";
+import TopHeadlines from "./components/TopHeadlines";
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CountryNews from "./components/CountryNews";
 
 function App() {
   const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="w-full">
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<AllNews />} />
+          <Route path="/top-headlines/:category" element={<TopHeadlines />} />
+          <Route path="/country/:iso" element={<CountryNews />} />
+        </Routes>
+        {/* <Cards />  */}
+        {/* <Footer />   */}
+      </BrowserRouter>
+    </div>
+  );
 }
 
-export default App
+export default App;
